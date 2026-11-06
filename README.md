@@ -32,3 +32,10 @@ The tree will not split beyond `max_depth`. When a leaf at maximum depth exceeds
 - `QuadTreeGrid` — the tree class. Constructor: `QuadTreeGrid(bounds=(left, bottom, right, top), capacity=8, max_depth=10)`. Methods: `insert(x, y, data=None)`, `query(box)`, `stats()`, `make_box(...)` (static).
 - `BoundingBox` — frozen rectangle with `contains(x, y)` and `intersects(other)`.
 - `Point` — frozen dataclass with `x`, `y`, `data` fields; iterable as `(x, y)`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
